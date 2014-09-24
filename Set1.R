@@ -215,12 +215,12 @@ setwd("/Users/meghanjordan/Workspace/D4D/SET1")
 
 > setnames(ARR_ID, c("ARR_ID", "REG", "DEPT", "ARR"), c("site_id", "region", "dept", "district"))
 
-> site_id_list <- merge(ARR_ID, SITE_ID, by="site_id")
->rm(SITE_ID, ARR_ID)
+> arr_id_list <- merge(ARR_ID, SITE_ID, by="arr_id")
+
 
 #merge set1s_m1 and set1s_m2
 > sms_m1_m2 <- rbind(set1s_m1, set1s_m2)
 
-#view sms_m1_m2 with site_id_list
+
 
 
