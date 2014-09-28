@@ -4,7 +4,7 @@ library(dplyr)
 library(doBy)
 library(ggplot2)
 
-setwd("/Users/meghanjordan/Workspace/D4D/SET1")
+setwd("/Users/meghanjordan/data/SET1")
 
 ########################################
 # Tivaouane Magal:                     #
