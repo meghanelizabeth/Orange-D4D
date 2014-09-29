@@ -59,7 +59,7 @@ k <- read.csv(file="bt-SET1S_01.csv")
 l <- read.csv(file="bu-SET1S_01.csv")
 
 names(a) <- c("timestamp", "outgoing_siteid", "incoming_siteid", "number_of_sms")
-setnames(b, c("X2013.01.13.01", "X114", "X16", "X4"), c("timestamp", "outgoing_siteid", "incoming_siteid", "number_of_sms"))
+names(b) <- c("timestamp", "outgoing_siteid", "incoming_siteid", "number_of_sms"))
 names(c) <- c("timestamp", "outgoing_siteid", "incoming_siteid", "number_of_sms")
 names(d) <- c("timestamp", "outgoing_siteid", "incoming_siteid", "number_of_sms")
 names(e)<- c("timestamp", "outgoing_siteid", "incoming_siteid", "number_of_sms")
