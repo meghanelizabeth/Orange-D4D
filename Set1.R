@@ -208,7 +208,7 @@ ARR_ID <- read.csv(file="SENEGAL_ARR.csv")
 SITE_ID <-read.csv(file="SITE_ARR_LONLAT.csv")
 
 #merge SITE_ID and ARR_ID
-setnames(ARR_ID, c("ARR_ID", "REG", "DEPT", "ARR"), c("site_id", "region", "dept", "district"))
+names(ARR_ID) <- c("arr_id", "region", "dept", "district")
 
 arr_id_list <- merge(ARR_ID, SITE_ID, by="arr_id")
 
