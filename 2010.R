@@ -30,12 +30,12 @@ str(june3)
 cbind(summary(june3$Reason))
 
 #Looking at data from day of and by Diourbel
-june3_2 <- subset(june3, Regions =="Diourbel")
+june3_2 <- subset(june3, Region =="Diourbel")
 summary(june3_2)
 str(june3_2)
 
 #reasons just for day of Magal and Diourbel
-cbind(summary(june3_2$Reason)
+#cbind(summary(june3_2$Reason) 
 sumofjune3_2 <- summary(june3_2$Reason)
 View(sumofjune3_2)
 
@@ -58,14 +58,14 @@ library(ggplot2)
 #plot for freq of phone calls per day for Month of June 
 monthOfJune <- subset(data1, Date >= "06/01/10" & Date <= "06/30/10")
 freqJune <- as.data.frame(table(monthOfJune$Date))
-plot(freqJune, main="Frequency of calls per day for June 2010", xlab="Days", ylab="Freq")
+#plot(freqJune, main="Frequency of calls per day for June 2010", xlab="Days", ylab="Freq")
 names(freqJune) <-c("Date", "Freq")
 freqJune$newdate <-strptime(as.character(freqJune$Date), "%m/%d/%y")
 freqJune$Date <- format(freqJune$newdate, "%d")
 freqJune$newdate <- NULL
 
-June2010 <- ggplot(freqJune, aes(x=Date, y=Freq, group=1)) + geom_line() 
-June2010 + ggtitle("Frequency of phone calls per day for June 2010")
+June2010 <- ggplot(freqJune, aes(x=Date, y=Freq, group=1)) + geom_line()
+June2010 + ggtitle("Frequency of phone calls per day for June 2010(June 3)")
 
 #frequency of phone calls per day for entire year 
 days <- (unique(data1$Date)) #to get each day indivdually 

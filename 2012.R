@@ -41,7 +41,7 @@ str(jan12)
 cbind(summary(jan12$Reason))
 
 #day of Magal and by diourbel
-jan12_2 <- subset(jan12, Regions =="Diourbel")
+jan12_2 <- subset(jan12, Region =="Diourbel")
 summary(jan12_2)
 str(jan12_2)
 
@@ -70,16 +70,17 @@ freq <-as.data.frame(table(data2012$Date)) #includes merge
 freq3 <- as.data.frame(table(data3$Date))
 plot(freq3, main="Frequency of calls per day for 2012", xlab="Days", ylab="Freq")
 
+
 #plot for freq of calls per day for month of Jan 2012
 monthOfJan12 <- subset(data3, Date >= "01/01/12" & Date <= "01/31/12")
 freqJan12 <- as.data.frame(table(monthOfJan12$Date))
-plot(freqJan12, main="Frequency of calls per day for Jan 2012", xlab="Days", ylab="Freq")
+#plot(freqJan12, main="Frequency of calls per day for Jan 2012", xlab="Days", ylab="Freq")
 names(freqJan12) <-c("Date", "Freq")
 freqJan12$newdate <-strptime(as.character(freqJan12$Date), "%m/%d/%y")
 freqJan12$Date <- format(freqJan12$newdate, "%d")
 freqJan12$newdate <- NULL
 
 Jan2012 <- ggplot(freqJune, aes(x=Date, y=Freq, group=1)) + geom_line() 
-Jan2012 + ggtitle("Frequency of phone calls per day for Jan 2012")
+Jan2012 + ggtitle("Frequency of phone calls per day for Jan 2012(Jan12)")
 
 
