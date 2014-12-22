@@ -78,5 +78,10 @@ freqJan$newdate <-strptime(as.character(freqJan$Date), "%m/%d/%y")
 freqJan$Date <- format(freqJan$newdate, "%d")
 freqJan$newdate <- NULL
 
+#freqJune MISSING
 Jan2011 <- ggplot(freqJune, aes(x=Date, y=Freq, group=1)) + geom_line() 
+<<<<<<< HEAD
 Jan2011 + ggtitle("Frequency of phone calls per day for Jan 2011(Jan 6)")
+=======
+Jan2011 + ggtitle("Frequency of phone calls per day for Jan 2011")
+>>>>>>> 5a06a029e9d5c855d9a840c69dee77e9c256c4e8
