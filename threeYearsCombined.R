@@ -52,11 +52,11 @@ a < "2014-12-01"
 a < "2015-12-01"
 #true
 
-
+#getting the data of reasons for before the festival 
 jan12Before <- subset(data2012, Date >= "2011-12-28" & Date <= "2012-01-12") 
 jan6Before <- subset(data2011, Date >= "2010-12-22" & Date <= "2011-01-06") 
 
-#more for 2011
+#for 2011
 magal2012jan12beforeafter <- subset(data20112012, Date >= "2011-12-28" & Date <= "2012-01-28")
 days <- (unique(magal2012jan12beforeafter$Date))
 magal2012jan12beforeafter$Date <- as.POSIXct(magal2012jan12beforeafter$Date) 
