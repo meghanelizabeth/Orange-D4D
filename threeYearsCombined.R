@@ -23,46 +23,30 @@ is.character(data2012$Date)
 data20102011 <- rbind(data2010,data2011)
 data20112012 <- rbind(data2011, data2012)
 
-magal2011jan6beforeafter <- subset(data20102011, Date >= "2010-12-22" & Date <= "2011-01-21")
+magal2011jan6beforeafter <- subset(data20102011, Date >= "2010-12-30" & Date <= "2011-01-13")
 days <- (unique(magal2011jan6beforeafter$Date))
 magal2011jan6beforeafter$Date <- as.POSIXct(magal2011jan6beforeafter$Date) 
 freq <-as.data.frame(table(magal2011jan6beforeafter$Date)) 
 plot(freq, main="Frequency of calls per day for the 2011 Magal", xlab="Days", ylab="Freq")
 
 #better not to use 16 but for now...
-points(freq[c(16),][1], freq[c(16),][2], col=2)
-
-#reasons of the day with the most calls. Day 18 (2011-01-08) and 164 phones calls
-summary
-
-freq[c(18),][1]
-reasonscalls <- subset(data20102011,Date=="2011-01-08")
-
-#freq sample
-freq[1]
-freq[2]
-freq[c(16),]
-
-#date sample
-a = Sys.Date()
-a
-is.character(a)
-a < "2014-12-01"
-#false
-a < "2015-12-01"
-#true
+points(freq[c(8),][1], freq[c(8),][2], col=2)
 
 #getting the data of reasons for before the festival 
-jan12Before <- subset(data2012, Date >= "2011-12-28" & Date <= "2012-01-12") 
-jan6Before <- subset(data2011, Date >= "2010-12-22" & Date <= "2011-01-06") 
+jan12Before <- subset(data2012, Date >= "2012-01-05" & Date <= "2012-01-12") 
+jan6Before <- subset(data20102011, Date >= "2010-12-30" & Date <= "2011-01-06") 
+
+#after
+jan12after <- subset(data2012, Date >= "2012-01-12" & Date <= "2012-01-19") 
+jan6after <- subset(data2011, Date >= "2011-01-06" & Date <= "2011-01-13") 
 
 #for 2011
-magal2012jan12beforeafter <- subset(data20112012, Date >= "2011-12-28" & Date <= "2012-01-28")
+magal2012jan12beforeafter <- subset(data20112012, Date >= "2012-01-05" & Date <= "2012-01-19")
 days <- (unique(magal2012jan12beforeafter$Date))
 magal2012jan12beforeafter$Date <- as.POSIXct(magal2012jan12beforeafter$Date) 
 freq <-as.data.frame(table(magal2012jan12beforeafter$Date))
 plot(freq, main="Frequency of calls per day for the 2012 Magal", xlab="Days", ylab="Freq")
-points(freq[c(15),][1], freq[c(15),][2], col=2)
+points(freq[c(7),][1], freq[c(7),][2], col=2)
 
 
 #2010
