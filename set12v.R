@@ -39,7 +39,7 @@ toubaOutgoing2 <- subset(set12v, outgoing_site_id == 1043 | outgoing_site_id == 
 
 grpOutgoingCity2 <- group_by(toubaOutgoing2, timestamp)
 grpoutgoingcity12 <- summarize(grpOutgoingCity2, number_of_calls = sum(number_of_calls), total_call_duration = sum(total_call_duration))
-plot(grpoutgoingcity12$timestamp, grpoutgoingcity12$number_of_calls, main="Frequency of calls with Touba as originating city", xlab="Time", ylab="Nb calls")
+plot(grpoutgoingcity12$timestamp, grpoutgoingcity12$number_of_calls, main="Frequency of calls with Touba as originating city", xlab="Time", ylab="Nb calls") 
 points(grpoutgoingcity12[c(8),][1], grpoutgoingcity12[c(8),][2], col=2)
 
 
@@ -74,6 +74,79 @@ View(both)
 plot(both, main = "Frequency of calls with Touba as receiving and originating city")
 points(both[c(8),][1], both[c(8),][2], col=2)
 
-
-
 nrow(both)
+
+
+#for line graph
+#installation required R session restart for me 
+install.packages("ggplot2")
+library(ggplot2)
+install.packages("reshape")
+library(reshape2)
+install.packages("RColorBrewer")
+library(RColorBrewer)
+
+
+#tivaoune
+tiv <- read.csv(file="set1vjan16tivaounaelatlongsmall.csv")
+View(head(tiv))
+
+
+#plot for calls with Touba as incoming site, the sites ids are:
+#604, 605, 606, 609
+
+#touba as incoming city of origin 
+tivIncoming2 <- subset(tiv, incoming_site_id == 604 | incoming_site_id == 605 | incoming_site_id == 606 
+                         | incoming_site_id == 609)
+#view
+View(tivIncoming2)
+nrow(tivIncoming2)
+
+grpIncomingCity <- group_by(tivIncoming2, timestamp)
+grpincomingcity <- summarize(grpIncomingCity, number_of_calls = sum(number_of_calls), total_call_duration = sum(total_call_duration))
+plot(grpincomingcity$timestamp, grpincomingcity$number_of_calls, main="Frequency of calls with Tivaouane as receiving city", xlab="Time", ylab="Nb calls")
+points(grpincomingcity[c(8),][1], grpincomingcity[c(8),][2], col=2)
+
+#touba as outgoing city of origin 
+tivOutgoing2 <- subset(set12v, outgoing_site_id == 604 | outgoing_site_id == 605 | outgoing_site_id == 606
+                         | outgoing_site_id == 609)
+
+grpOutgoingCity <- group_by(tivOutgoing2, timestamp)
+grpoutgoingcity <- summarize(grpOutgoingCity, number_of_calls = sum(number_of_calls), total_call_duration = sum(total_call_duration))
+plot(grpoutgoingcity$timestamp, grpoutgoingcity$number_of_calls, main="Frequency of calls with Tivaouane as originating city", xlab="Time", ylab="Nb calls") 
+points(grpoutgoingcity[c(8),][1], grpoutgoingcity[c(8),][2], col=2)
+
+
+#Dr Scharff's approach 1
+incomingCityNotTivaouane1 <- subset(tivIncoming2, outgoing_site_id != 604 & outgoing_site_id != 605 & outgoing_site_id != 606 & outgoing_site_id != 609)
+nrow(incomingCityNotTivaouane1)
+#[1] 424035
+
+#Dr Scharff's approach 2
+incomingCityNotTivaouane2 <- subset(tiv, 
+                                (outgoing_site_id != 604 & outgoing_site_id != 605 & outgoing_site_id != 606 & outgoing_site_id != 609) & 
+                                  (incoming_site_id == 604 | incoming_site_id == 605 | incoming_site_id == 606 | incoming_site_id == 609)
+)
+nrow(incomingCityNotTivaouane2)
+#[1] 424035
+
+#install SQL to R translator package
+install.packages("sqldf")
+require(sqldf)
+
+#testing sqldf 
+s01 <- sqldf("select incoming_site_id, timestamp from tiv")
+View(s01)
+
+#BOTH using sqldf
+bothTiv <- sqldf("SELECT timestamp, sum(number_of_calls) FROM tiv
+where (outgoing_site_id = 604 or outgoing_site_id = 605 or outgoing_site_id = 606 or outgoing_site_id = 609) and 
+(incoming_site_id = 604 or incoming_site_id = 605 or incoming_site_id = 606 or incoming_site_id = 609)
+group by timestamp")
+
+View(bothTiv)
+plot(bothTiv, main = "Frequency of calls with Tivaouane as receiving and originating city")
+points(bothTiv[c(8),][1], both[c(8),][2], col=2)
+
+nrow(bothTiv)
+#[1] 15
