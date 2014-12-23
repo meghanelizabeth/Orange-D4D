@@ -32,6 +32,16 @@ grpincomingcity12 <- summarize(grpIncomingCity2, number_of_SMS = sum(number_of_S
 plot(grpincomingcity12$timestamp, grpincomingcity12$number_of_SMS, main="Frequency of SMS messages with Touba as receiving city", xlab="Time", ylab="Nb SMS")
 points(grpincomingcity12[c(8),][1], grpincomingcity12[c(8),][2], col=2)
 
+grpincomingcity12[c(8),][1]
+# timestamp
+#2013-12-22
+
+grpincomingcity12[c(8),][2]
+#number_of_SMS
+#108164
+
+
+
 #touba as outgoing city of origin 
 toubaOutgoing2 <- subset(set12s, outgoing_site_id == 1043 | outgoing_site_id == 1054 | outgoing_site_id == 1046 
                          | outgoing_site_id == 1049 | outgoing_site_id == 1055 
@@ -41,6 +51,16 @@ grpOutgoingCity2 <- group_by(toubaOutgoing2, timestamp)
 grpoutgoingcity12 <- summarize(grpOutgoingCity2, number_of_SMS = sum(number_of_SMS))
 plot(grpoutgoingcity12$timestamp, grpoutgoingcity12$number_of_SMS, main="Frequency of SMS messages with Touba as originating city", xlab="Time", ylab="Nb SMS") 
 points(grpoutgoingcity12[c(8),][1], grpoutgoingcity12[c(8),][2], col=2)
+
+grpoutgoingcity12[c(8),][1]
+#timestamp
+#2013-12-22
+
+grpoutgoingcity12[c(8),][2]
+#number_of_SMS
+#131342
+
+
 
 
 #install SQL to R translator package
@@ -60,6 +80,15 @@ both <- sqldf("SELECT timestamp, sum(number_of_SMS) FROM set12s
 View(both)
 plot(both, main = "Frequency of SMS messages with Touba as receiving and originating city", xlab="Time", ylab="Nb SMS")
 points(both[c(8),][1], both[c(8),][2], col=2)
+
+both[c(8),][1]
+#timestamp
+#2013-12-22
+
+both[c(8),][2]
+#sum(number_of_SMS)
+#14171
+
 
 nrow(both)
 #[1] 15

@@ -3,8 +3,12 @@
 tivSms <- read.csv(file="set1SMStivaouane.csv")
 View(head(tivSms))
 
+names(tivSms) <- c("x", "incoming_site_id", "outgoing_site_id", "timestamp", "number_of_SMS", "lonoutgoing", "latoutgoing", "lonincoming", "latincoming")
 
-#plot for calls with Touba as incoming site, the sites ids are:
+
+
+
+#plot for calls with Tiv as incoming site, the sites ids are:
 #604, 605, 606, 609
 
 #tiv as incoming city of origin 
@@ -20,6 +24,14 @@ grpincomingcity <- summarize(grpIncomingCity, number_of_SMS = sum(number_of_SMS)
 plot(grpincomingcity$timestamp, grpincomingcity$number_of_SMS, main="Frequency of SMS messages with Tivaouane as receiving city", xlab="Time", ylab="Nb sms")
 points(grpincomingcity[c(8),][1], grpincomingcity[c(8),][2], col=2)
 
+grpincomingcity[c(8),][1]
+#timestamp
+#2013-01-23
+
+grpincomingcity[c(8),][2]
+#number_of_SMS
+#565483
+
 #tiv as outgoing city of origin 
 tivOutgoing2 <- subset(tivSms, outgoing_site_id == 604 | outgoing_site_id == 605 | outgoing_site_id == 606
                        | outgoing_site_id == 609)
@@ -28,6 +40,14 @@ grpOutgoingCity <- group_by(tivOutgoing2, timestamp)
 grpoutgoingcity <- summarize(grpOutgoingCity, number_of_SMS = sum(number_of_SMS))
 plot(grpoutgoingcity$timestamp, grpoutgoingcity$number_of_SMS, main="Frequency of SMS messages with Tivaouane as originating city", xlab="Time", ylab="Nb sms") 
 points(grpoutgoingcity[c(8),][1], grpoutgoingcity[c(8),][2], col=2)
+
+grpoutgoingcity[c(8),][1]
+#timestamp
+#2013-01-23
+
+grpoutgoingcity[c(8),][2]
+#number_of_SMS
+#552001
 
 
 #install SQL to R translator package
@@ -46,7 +66,15 @@ group by timestamp")
 
 View(bothTiv)
 plot(bothTiv, main = "Frequency of SMS with Tivaouane as receiving and originating city",xlab="Time", ylab="Nb sms")
-points(bothTiv[c(8),][1], both[c(8),][2], col=2)
+points(bothTiv[c(8),][1], bothTiv[c(8),][2], col=2)
+
+bothTiv[c(8),][1]
+# timestamp
+#2013-01-23
+
+bothTiv[c(8),][2]
+#sum(number_of_SMS)
+#154561
 
 nrow(bothTiv)
 #[1] 15
