@@ -7,7 +7,7 @@ View(head(tivSms))
 #plot for calls with Touba as incoming site, the sites ids are:
 #604, 605, 606, 609
 
-#touba as incoming city of origin 
+#tiv as incoming city of origin 
 tivIncoming2 <- subset(tivSms, incoming_site_id == 604 | incoming_site_id == 605 | incoming_site_id == 606 
                        | incoming_site_id == 609)
 #view
@@ -20,7 +20,7 @@ grpincomingcity <- summarize(grpIncomingCity, number_of_SMS = sum(number_of_SMS)
 plot(grpincomingcity$timestamp, grpincomingcity$number_of_SMS, main="Frequency of SMS messages with Tivaouane as receiving city", xlab="Time", ylab="Nb sms")
 points(grpincomingcity[c(8),][1], grpincomingcity[c(8),][2], col=2)
 
-#touba as outgoing city of origin 
+#tiv as outgoing city of origin 
 tivOutgoing2 <- subset(tivSms, outgoing_site_id == 604 | outgoing_site_id == 605 | outgoing_site_id == 606
                        | outgoing_site_id == 609)
 
