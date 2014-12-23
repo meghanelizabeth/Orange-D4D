@@ -14,68 +14,9 @@ install.packages("dplyr")
 library(dplyr)
 
 
-#FIRST ANALYSIS ATTEMPT WITH CHANGES TO PLOT TITLES
 
 #plot for calls with Touba as incoming site, the sites ids are:
 #1043, 1054, 1046, 1049, 1055, 1050
-
-touba1 <- subset(set12v, incoming_site_id == 1043)
-touba2 <- subset(set12v, incoming_site_id == 1054)
-touba3 <- subset(set12v, incoming_site_id == 1046)
-touba4 <- subset(set12v, incoming_site_id == 1049)
-touba5 <- subset(set12v, incoming_site_id == 1055)
-touba6 <- subset(set12v, incoming_site_id == 1050)
-toubaIncoming <- rbind(touba1, touba2, touba3, touba4, touba5, touba6)
-
-#test combination of the above subsets
-View(toubaIncoming)
-unique(toubaIncoming$incoming_site_id)
-
-#Produce plots for Touba as incoming city 
-grpIncomingCity <- group_by(toubaIncoming, timestamp)
-grpincomingcity1 <- summarize(grpIncomingCity, number_of_calls = sum(number_of_calls), total_call_duration = sum(total_call_duration))
-plot(grpincomingcity1$timestamp, grpincomingcity1$number_of_calls, main="Calls for Magal Dec 22,2013 with Touba as incoming city for calls", xlab="Time", ylab="Nb calls")
-
-#Next for touba as outgoing city 
-toubaA <- subset(set12v, outgoing_site_id == 1043)
-toubaB <- subset(set12v, outgoing_site_id == 1054)
-toubaC <- subset(set12v, outgoing_site_id == 1046)
-toubaD <- subset(set12v, outgoing_site_id == 1049)
-toubaE <- subset(set12v, outgoing_site_id == 1055)
-toubaF <- subset(set12v, outgoing_site_id == 1050)
-toubaOutgoing <- rbind(toubaA, toubaB, toubaC, toubaD, toubaE, toubaF)
-
-#test combination of the above subsets
-View(toubaOutgoing)
-unique(toubaOutgoing$outgoing_site_id)
-
-#Produce plots for Touba as outgoing city 
-grpOutgoingCity <- group_by(toubaOutgoing, timestamp)
-grpoutgoingcity1 <- summarize(grpOutgoingCity, number_of_calls = sum(number_of_calls), total_call_duration = sum(total_call_duration))
-plot(grpoutgoingcity1$timestamp, grpoutgoingcity1$number_of_calls, main="Calls for Magal Dec 22,2013 with Touba as outcoming city for calls", xlab="Time", ylab="Nb calls")
-
-
-#touba as both incoming and outgoing 
-t1 <- subset(set12v, incoming_site_id == 1043 & outgoing_site_id == 1043)
-t2 <- subset(set12v, incoming_site_id == 1054 & outgoing_site_id == 1054)
-t3 <- subset(set12v, incoming_site_id == 1046 & outgoing_site_id == 1046)
-t4 <- subset(set12v, incoming_site_id == 1049 &  outgoing_site_id == 1049)
-t5 <- subset(set12v, incoming_site_id == 1055 & outgoing_site_id == 1055)
-t6 <- subset(set12v, incoming_site_id == 1050 & outgoing_site_id == 1050)
-
-withinCity <- rbind(t1, t2, t3, t4, t5, t6)
-
-#test combination of the above subsets
-View(withinCity)
-unique(withinCity$outgoing_site_id)
-unique(withinCity$incoming_site_id)
-
-#produce plots for Touba as both incoming and outgoing city of origin
-grpWithinCity <- group_by(withinCity, timestamp)
-grpwithincity1 <- summarize(grpWithinCity, number_of_calls = sum(number_of_calls), total_call_duration = sum(total_call_duration))
-plot(grpwithincity1$timestamp, grpwithincity1$number_of_calls, main="Calls for Magal Dec 22,2013 with Touba as incoming or outgoing city of origin", xlab="Time", ylab="Nb calls")
-
-#SECOND ANALYSIS ATTEMPT
 
 #touba as incoming city of origin 
 toubaIncoming2 <- subset(set12v, incoming_site_id == 1043 | incoming_site_id == 1054 | incoming_site_id == 1046 
@@ -98,18 +39,6 @@ toubaOutgoing2 <- subset(set12v, outgoing_site_id == 1043 | outgoing_site_id == 
 grpOutgoingCity2 <- group_by(toubaOutgoing2, timestamp)
 grpoutgoingcity12 <- summarize(grpOutgoingCity2, number_of_calls = sum(number_of_calls), total_call_duration = sum(total_call_duration))
 plot(grpoutgoingcity12$timestamp, grpoutgoingcity12$number_of_calls, main="Calls for Magal Dec 22,2013 with Touba as outcoming city for calls(3rd)", xlab="Time", ylab="Nb calls")
-
-#touba as both 
-withinCity2 <- subset((set12v, outgoing_site_id == 1043 | outgoing_site_id == 1054 | outgoing_site_id == 1046 
-                      | outgoing_site_id == 1049 | outgoing_site_id == 1055 
-                      | outgoing_site_id == 1050) & 
-                      (set12v, incoming_site_id == 1043 | incoming_site_id == 1054 | incoming_site_id == 1046 
-                         | incoming_site_id == 1049 | incoming_site_id == 1055 
-                         | incoming_site_id == 1050))
-
-grpWithinCity2 <- group_by(withinCity2, timestamp)
-grpwithincity12 <- summarize(grpWithinCity2, number_of_calls = sum(number_of_calls), total_call_duration = sum(total_call_duration))
-plot(grpwithincity12$timestamp, grpwithincity12$number_of_calls, main="Calls for Magal Dec 22,2013 with Touba as both(3rd)", xlab="Time", ylab="Nb calls")
 
 
 
@@ -143,3 +72,4 @@ group by timestamp")
 View(both)
 plot(both, main = "both")
 
+nrow(both)
