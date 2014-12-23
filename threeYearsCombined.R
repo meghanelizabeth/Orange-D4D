@@ -40,13 +40,13 @@ jan6Before <- subset(data20102011, Date >= "2010-12-30" & Date <= "2011-01-06")
 jan12after <- subset(data2012, Date >= "2012-01-12" & Date <= "2012-01-19") 
 jan6after <- subset(data2011, Date >= "2011-01-06" & Date <= "2011-01-13") 
 
-#for 2011
+#for 2012
 magal2012jan12beforeafter <- subset(data20112012, Date >= "2012-01-05" & Date <= "2012-01-19")
 days <- (unique(magal2012jan12beforeafter$Date))
 magal2012jan12beforeafter$Date <- as.POSIXct(magal2012jan12beforeafter$Date) 
 freq <-as.data.frame(table(magal2012jan12beforeafter$Date))
 plot(freq, main="Frequency of calls per day for the 2012 Magal", xlab="Days", ylab="Freq")
-points(freq[c(7),][1], freq[c(7),][2], col=2)
+points(freq[c(8),][1], freq[c(8),][2], col=2)
 
 
 #2010
