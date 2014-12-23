@@ -43,19 +43,6 @@ plot(grpoutgoingcity12$timestamp, grpoutgoingcity12$number_of_calls, main="Frequ
 points(grpoutgoingcity12[c(8),][1], grpoutgoingcity12[c(8),][2], col=2)
 
 
-#Dr Scharff's approach 1
-incomingCityNotTouba1 <- subset(toubaIncoming2, outgoing_site_id != 1043 & outgoing_site_id != 1054 & outgoing_site_id != 1046 & outgoing_site_id != 1049 & outgoing_site_id != 1055 & outgoing_site_id != 1050)
-nrow(incomingCityNotTouba1)
-#[1] 314827
-
-#Dr Scharff's approach 2
-incomingCityNotTouba2 <- subset(set12v, 
-                                (outgoing_site_id != 1043 & outgoing_site_id != 1054 & outgoing_site_id != 1046 & outgoing_site_id != 1049 & outgoing_site_id != 1055 & outgoing_site_id != 1050) & 
-                                  (incoming_site_id == 1043 | incoming_site_id == 1054 | incoming_site_id == 1046 | incoming_site_id == 1049 | incoming_site_id == 1055 | incoming_site_id == 1050)
-)
-nrow(incomingCityNotTouba2)
-#[1] 314827
-
 #install SQL to R translator package
 install.packages("sqldf")
 require(sqldf)
@@ -107,8 +94,12 @@ grpincomingcity <- summarize(grpIncomingCity, number_of_calls = sum(number_of_ca
 plot(grpincomingcity$timestamp, grpincomingcity$number_of_calls, main="Frequency of calls with Tivaouane as receiving city", xlab="Time", ylab="Nb calls")
 points(grpincomingcity[c(8),][1], grpincomingcity[c(8),][2], col=2)
 
-#touba as outgoing city of origin 
-tivOutgoing2 <- subset(set12v, outgoing_site_id == 604 | outgoing_site_id == 605 | outgoing_site_id == 606
+summary(grpincomingcity$number_of_calls)
+#Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+#1   25000   50000   50000   75000  100000 
+
+#tiv as outgoing city of origin 
+tivOutgoing2 <- subset(tiv, outgoing_site_id == 604 | outgoing_site_id == 605 | outgoing_site_id == 606
                          | outgoing_site_id == 609)
 
 grpOutgoingCity <- group_by(tivOutgoing2, timestamp)
@@ -117,18 +108,7 @@ plot(grpoutgoingcity$timestamp, grpoutgoingcity$number_of_calls, main="Frequency
 points(grpoutgoingcity[c(8),][1], grpoutgoingcity[c(8),][2], col=2)
 
 
-#Dr Scharff's approach 1
-incomingCityNotTivaouane1 <- subset(tivIncoming2, outgoing_site_id != 604 & outgoing_site_id != 605 & outgoing_site_id != 606 & outgoing_site_id != 609)
-nrow(incomingCityNotTivaouane1)
-#[1] 424035
 
-#Dr Scharff's approach 2
-incomingCityNotTivaouane2 <- subset(tiv, 
-                                (outgoing_site_id != 604 & outgoing_site_id != 605 & outgoing_site_id != 606 & outgoing_site_id != 609) & 
-                                  (incoming_site_id == 604 | incoming_site_id == 605 | incoming_site_id == 606 | incoming_site_id == 609)
-)
-nrow(incomingCityNotTivaouane2)
-#[1] 424035
 
 #install SQL to R translator package
 install.packages("sqldf")
@@ -147,6 +127,15 @@ group by timestamp")
 View(bothTiv)
 plot(bothTiv, main = "Frequency of calls with Tivaouane as receiving and originating city", xlab="Time", ylab="Nb Calls")
 points(bothTiv[c(8),][1], both[c(8),][2], col=2)
+
+summary(bothTiv)
+timestamp sum(number_of_calls)
+#2013-01-16:1   Min.   : 13930      
+#2013-01-17:1   1st Qu.: 18554      
+#2013-01-18:1   Median : 23182      
+#2013-01-19:1   Mean   : 69443      
+#2013-01-20:1   3rd Qu.: 43384      
+#2013-01-21:1   Max.   :419278    
 
 nrow(bothTiv)
 #[1] 15

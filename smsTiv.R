@@ -30,19 +30,6 @@ plot(grpoutgoingcity$timestamp, grpoutgoingcity$number_of_SMS, main="Frequency o
 points(grpoutgoingcity[c(8),][1], grpoutgoingcity[c(8),][2], col=2)
 
 
-#Dr Scharff's approach 1
-incomingCityNotTivaouane1 <- subset(tivIncoming2, outgoing_site_id != 604 & outgoing_site_id != 605 & outgoing_site_id != 606 & outgoing_site_id != 609)
-nrow(incomingCityNotTivaouane1)
-#[1] 198316
-
-#Dr Scharff's approach 2
-incomingCityNotTivaouane2 <- subset(tivSms, 
-                                    (outgoing_site_id != 604 & outgoing_site_id != 605 & outgoing_site_id != 606 & outgoing_site_id != 609) & 
-                                      (incoming_site_id == 604 | incoming_site_id == 605 | incoming_site_id == 606 | incoming_site_id == 609)
-)
-nrow(incomingCityNotTivaouane2)
-#[1] 198316
-
 #install SQL to R translator package
 install.packages("sqldf")
 require(sqldf)
