@@ -44,7 +44,7 @@ points(grpoutgoingcity12[c(8),][1], grpoutgoingcity12[c(8),][2], col=2)
 
 
 #Dr Scharff's approach 1
-incomingCityNotTouba1 <- subset(toubaIncoming, outgoing_site_id != 1043 & outgoing_site_id != 1054 & outgoing_site_id != 1046 & outgoing_site_id != 1049 & outgoing_site_id != 1055 & outgoing_site_id != 1050)
+incomingCityNotTouba1 <- subset(toubaIncoming2, outgoing_site_id != 1043 & outgoing_site_id != 1054 & outgoing_site_id != 1046 & outgoing_site_id != 1049 & outgoing_site_id != 1055 & outgoing_site_id != 1050)
 nrow(incomingCityNotTouba1)
 #[1] 314827
 
@@ -71,7 +71,7 @@ where (outgoing_site_id = 1043 or outgoing_site_id = 1054 or outgoing_site_id = 
 group by timestamp")
 
 View(both)
-plot(both, main = "Frequency of calls with Touba as receiving and originating city")
+plot(both, main = "Frequency of calls with Touba as receiving and originating city", xlab="Time", ylab="Nb Calls")
 points(both[c(8),][1], both[c(8),][2], col=2)
 
 nrow(both)
@@ -145,7 +145,7 @@ where (outgoing_site_id = 604 or outgoing_site_id = 605 or outgoing_site_id = 60
 group by timestamp")
 
 View(bothTiv)
-plot(bothTiv, main = "Frequency of calls with Tivaouane as receiving and originating city")
+plot(bothTiv, main = "Frequency of calls with Tivaouane as receiving and originating city", xlab="Time", ylab="Nb Calls")
 points(bothTiv[c(8),][1], both[c(8),][2], col=2)
 
 nrow(bothTiv)
