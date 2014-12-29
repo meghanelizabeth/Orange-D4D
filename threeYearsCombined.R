@@ -1,3 +1,6 @@
+setwd("/Users/meghanjordan/Health Data2") #set your own location
+
+
 data2010 <- read.csv(file="2010final.csv")
 data2011 <- read.csv(file="2011final.csv")
 data2012 <- read.csv(file="2012final.csv")
@@ -27,7 +30,7 @@ magal2011jan6beforeafter <- subset(data20102011, Date >= "2010-12-30" & Date <= 
 days <- (unique(magal2011jan6beforeafter$Date))
 magal2011jan6beforeafter$Date <- as.POSIXct(magal2011jan6beforeafter$Date) 
 freq <-as.data.frame(table(magal2011jan6beforeafter$Date)) 
-plot(freq, main="Frequency of calls per day for the 2011 Magal", xlab="Days", ylab="Freq")
+plot(freq, main="Frequency of calls per day for the 2011 Magal\n(Magal of Touba on 01/06/2011)", xlab="Days", ylab="Freq")
 
 #better not to use 16 but for now...
 points(freq[c(8),][1], freq[c(8),][2], col=2)
@@ -45,7 +48,7 @@ magal2012jan12beforeafter <- subset(data20112012, Date >= "2012-01-05" & Date <=
 days <- (unique(magal2012jan12beforeafter$Date))
 magal2012jan12beforeafter$Date <- as.POSIXct(magal2012jan12beforeafter$Date) 
 freq <-as.data.frame(table(magal2012jan12beforeafter$Date))
-plot(freq, main="Frequency of calls per day for the 2012 Magal", xlab="Days", ylab="Freq")
+plot(freq, main="Frequency of calls per day for the 2012 Magal \n(Magal of Touba on 01/12/2012)", xlab="Days", ylab="Freq")
 points(freq[c(8),][1], freq[c(8),][2], col=2)
 
 
@@ -58,4 +61,20 @@ plot(freq, main="Frequency of calls per day for the 2010 Magal", xlab="Days", yl
 points(freq[c(15),][1], freq[c(15),][2], col=2)
 
 
+#gamou
+#February 2011 - The Gamou is on 2/15/2011
+#February 2012 - The Gamou is on 2/4/2012
 
+gamou2011feb15beforeafter <- subset(data2011, Date >= "2011-02-08" & Date <= "2011-02-22")
+days <- (unique(gamou2011feb15beforeafter$Date))
+gamou2011feb15beforeafter$Date <- as.POSIXct(gamou2011feb15beforeafter$Date) 
+freq <-as.data.frame(table(gamou2011feb15beforeafter$Date)) 
+plot(freq, main="Frequency of calls per day for the 2011 Gamou \n(Gamou of Tivaouane on 02/15/2011)", xlab="Days", ylab="Freq")
+points(freq[c(8),][1], freq[c(8),][2], col=2)
+
+gamou2012feb4beforeafter <- subset(data2011, Date >= "2011-01-28" & Date <= "2011-02-11")
+days <- (unique(gamou2012feb4beforeafter$Date))
+gamou2012feb4beforeafter$Date <- as.POSIXct(gamou2012feb4beforeafter$Date) 
+freq <-as.data.frame(table(gamou2012feb4beforeafter$Date)) 
+plot(freq, main="Frequency of calls per day for the 2012 Gamou \n(Gamou of Tivaouane on 02/04/2012)", xlab="Days", ylab="Freq")
+points(freq[c(8),][1], freq[c(8),][2], col=2)
